@@ -1,0 +1,63 @@
+mkdir <foldername> -> make a folder
+ls -> list all the things in the folder
+ls -a -> lists hidden components as well
+pwd -> present working directory
+ls -l -> list files with more details
+ls -R -> list all files from subdirectory too
+cat -> contents of a file 
+echo -> shows desired string or value
+man -> tells about all commands
+cat file.txt | tr a-z A-Z > upper.txt 
+  Step by step explanation->
+   cat file.txt reads the contents of the file
+   | is a pipe, that passes the contents into a buffer
+   tr a-z A-Z translates all the small letters to caps inside the buffer
+   > upper.txt writes the content in the buffer in upper.txt
+touch <filename> -> create a file 
+cp <filename> path -> copy file to path
+mv <filename> path -> move file to path
+rm <filename> -> remove file
+cp -R <foldername> path -> copying folder to path
+rmdir -> removing directory 
+sudo apt update -> installing, updating software
+df -> shows disk usage of file systems
+du <foldername> -> shows space used by all the files in the folder
+du -sh <foldername> -> Shows the summary/total space used by the folder(s) and h stands for human readable
+head -n <no of lines(n)> <filename> -> displays first n lines of the file
+head <filename> -> displays by default first 10 lines of file
+tail <no of lines(n)> <filename> -> displays last n lines of the file
+tail <filename> -> displays last 10 lines of the file
+tail -f <filename> -> shows real time updates to the file
+diff <filename1> <filename2> -> compares both the files
+diff -u <filename1> <filename2> -> compares both the files in unified format
+diff -y <filename1> <filename2> -> compares both the files in side by side
+locate <filename> -> locates a file using a prebuilt database
+find . -name "<filename>" -> finds a file in current directory
+find . -iname "<filename>" -> finds being case-insensitive
+find . -type f   # files -> find files
+find . -type d   # directories -> find directories
+find . -size +10M -> find by size(+10 means more than 10MB)
+chmod +x <filename> -> changing permissions
+sudo chown user <filename> -> changing ownership 
+grep "<string>" <filename> -> searching string in a file
+grep -w "<string>" <filename> -> Search by exact string
+grep -i "<string>" <filename> -> search by case insensitive
+grep -n "<string>" <filename> -> search and show line number
+grep -r "<string>" . -> recursively search for the word in a directory
+grep -c "<string>" <filename> -> locating string with tracking count
+grep -l "hello" *.txt -> lists filenames containing the string
+history -> history of command usage
+sort <filename> -> prints contents of file in sorted order
+ping <url> -> pings an url constantly, and gives feedback
+top, htop, btop -> JAADU
+uname -> kernel name
+zip -> zips files
+unzip -> unzips files
+hostname -> names host
+hostname -I -> names hostname with IP address
+hostname -f -> full domain name
+lscpu -> cpu info
+free -> free memory checking
+vmstat -> virtual memory checking
+nslookup <domainname> -> IP of a domain
+netstat -> all the active ports

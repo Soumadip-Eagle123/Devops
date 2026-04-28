@@ -1,0 +1,76 @@
+
+-----GIT
+
+git init -> initialize 
+ls .git -> components
+git status -> shows tracked/untracked files, modified files 
+git add . -> all untracked files gets added to the tracking list
+git add <filename> -> file will get added to the tracking list
+git commit -m "<message>" -> file will get committed with a message(m stands for message)
+git restore --staged <filename> -> undoes the process of git add .
+git log -> all the commit history
+git reset <commitID> -> clears all the commit history before the commitID of the commit message
+git stash -> Save progress of a project by putting it in "stash"(backstage)
+git stash pop -> Pop the stash, which will lead to put the progress back in status
+git stash clear -> Clear all stash without applying 
+git stash drop -> Clear latest stash without applying
+git stash apply -> Apply to status but do not delete
+
+-----GITHUB 
+
+git remote add origin <repo-link> -> adds the github repo to the git  
+git remote -v -> shows all the links attached to the git
+git push origin master(master) -> pushing to github
+git branch <branchname> -> create a branch(not commiting to the main branch, so create a new branch)
+git checkout <branchname> -> switches your working directory to that branchname
+Initial state (main branch)
+
+A --- B --- C   (main, HEAD)
+Create a new branch:
+
+git branch feature-login
+git checkout feature-login
+Now:
+
+A --- B --- C   (main)
+            \
+             (feature-login, HEAD)
+Add commits in feature branch:
+
+A --- B --- C   (main)
+            \
+             D --- E   (feature-login, HEAD)
+git merge <branchname> -> merge the branch with the main branch
+DIAGRAM: After Merge (Pull Request Accepted)
+Before merge:
+
+A --- B --- C   (main)
+            \
+             D --- E   (feature-login)
+After merge:
+
+A --- B --- C --------- F   (main, HEAD)
+            \         /
+             D --- E
+fork(in github) -> copy of the project
+git clone <github-repo-link(the forked repo)> -> taking the project in the working folder
+git remote add upstream <github-repo-OG-link> -> adding the OG repo link in the git
+
+if wanna do multiple pull request, create different branches, make changes to the code, make pull requests in each!
+
+git push origin <branch-name> -f -> force push (rewriting history)
+git fetch --all --prune -> will fetch all the changes done (everywhere)
+git reset --hard upstream/main -> will match all the commits done in the upstream, and record the commits
+
+alright this is too big -> just one liner -> git pull upstream main(equivalent to above two lines)
+
+after this just push the commits fetched to your git from the upstream to your origin 
+just by git push origin main 
+(btw for doing these there is a direct method, where github gives buttons to do above two process LOL)
+
+git add .; git commit -m "...."-> doing add and commit together
+git rebase -i <commitID> -> a file will open(you have to either mark commits pick or squash)
+any commit that is marked as "s" will be combined with the pick marked commit above it.. And also you can leave a commit message
+
+merge conflict resolution -> direct method in github, it gives you an option to choose the change you want to incorporate, and drop the other!
+
