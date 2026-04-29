@@ -1,0 +1,182 @@
+One application on one server
+VMWare -> virtual machines(not fast, dedicated OS, allocation, etc)
+Containers -> contains all the parts 
+
+1. Runtime(runc)(start and stop)
+   Containerd(getting data, connecting with the network, etc)                  
+   -------------------------
+   |                       |
+   |Orchestration          |
+   |Engine                 |
+   |Runtiime               |
+   -------------------------
+2. Engine, Daemon 
+
+DOCKER CLI --><-- REST API --><-- Server(Daemon)
+
+Docker --> Image --> Container
+            |          |
+            |          |
+            -> Class   ->Object
+Runtime specification, image specification
+
+---------------------------------------
+docker run -it <app name>
+
+docker run hello-world
+ - docker -> CLI
+ - run -> Run an image to create a container
+ - hello-world -> image name
+
+docker container ls
+
+docker stop <container-id>
+
+docker ps 
+docker ps -a
+
+Note: In below commands, instead of the full container-id we can also use the first 4-6 characters, it will act as shortened container id
+
+docker rm <container-id>
+
+docker inspect <container-id>
+or docker inspect <image-name>
+
+docker logs <container-id>/
+
+docker container prune -f
+
+docker run -d <container-name> ping <url>
+
+docker logs --since <t>s <containerid>
+
+docker start <container-id>
+
+docker stop <container-id>
+
+docker run -d -p 8080:<portno> <app name>
+
+docker exec -it <app-name> default-format(we used bash to relaunch ubuntu with names.txt in it with this)
+
+docker commit -m "<message>" <container-id> <image-name>:<version>
+
+to run -> docker run -it <image-name>:<version>
+
+docker rmi $(docker images -q) -f -> removing all images, with force(optional)
+
+docker run ubuntu:16.04
+
+docker inspect <container-id>
+
+Script ->
+# 1. The Base Image
+FROM node:18-alpine 
+
+# 2. Set the internal path (The "WORKDIR" you remembered)
+WORKDIR /usr/src/app
+
+# 3. Copy only dependency files first (for faster caching)
+COPY package*.json ./
+
+# 4. RUN the installation command during build
+RUN npm install
+
+# 5. Copy the rest of your source code
+COPY . .
+
+# 6. Inform Docker about the port
+EXPOSE 3000
+
+# 7. The command that runs only when the container STARTS
+CMD ["node", "app.js"]
+
+docker build . / docker build -t <image-name> . (. is just path)
+
+----------------------------
+
+Docker Client 
+|         grpc  
+--> Daemon --> Containerd --> multiple shim followed by runc
+once the container is created, runc will be removed(its use is to start the container is created, runc will be removed)
+If daemon is down, container will still be running
+Daemon -> dockerd
+containerd -> dockerdontainerd
+shim -> dockercontainerdshim
+runc -> dockerrunc
+
+-----------------------------
+Some description, for better understanding -> 
+ 1. Daemon → dockerd
+ What it is:
+
+The main Docker server process
+
+dockerd
+ Role:
+Listens to Docker CLI (docker run, docker ps, etc.)
+Manages:
+images
+containers
+networks
+volumes
+
+ Think:
+
+Brain of Docker
+
+ 2. containerd
+ What it is:
+
+A container runtime manager
+
+ Extracted from Docker to be a separate component
+
+ Role:
+Pull images
+Manage container lifecycle
+Handle storage
+Communicate with low-level runtime (runc)
+
+ Think:
+
+Manager that actually handles containers
+
+ 3. shim → containerd-shim
+ What it is:
+
+A small intermediate process per container
+
+containerd-shim
+ Role:
+Keeps container running even if containerd crashes
+Handles:
+STDIN / STDOUT
+exit status
+
+ Think:
+
+Babysitter for each container
+
+ 4. runc
+ What it is:
+
+Low-level runtime (based on OCI standard)
+
+runc
+ Role:
+Actually creates the container using:
+namespaces
+cgroups
+
+ This is where Linux isolation happens
+
+ Think:
+
+The worker that actually builds and runs container
+
+-------------------------
+       HTTP(2375) --> Default port used by docker for remote apis
+Client ---------> Server
+
+TLS --> Transport Layer Security (for suitable connection, docker allows allows connections that are secured)
+
