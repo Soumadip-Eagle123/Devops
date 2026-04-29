@@ -1,0 +1,29 @@
+yaml -> yet another markup language (old exp), yaml aint markup language (new exp)
+- data format used to exchange data
+- similar to XML and JSON
+- IN YAML, you can store only data and not commands
+Data serialization -> Process of converting the data objects that is present in a complex data structure into a data stream
+
+ OBJECT --> STREAM (Serialization) (Reverse is called deserialization)
+      
+       Serialiser
+OBJECT ---------> stream of bytes ---> (YAML OR Database OR Memory)
+ |
+  \
+   -> code + data
+
+Data Serialisation languages: JSON, YAML, XML
+
+-> Used in configuration files like Docker/Kubernetes, used also in logs, caches, etc..
+
+Benefits -> 
+ - Very easy to read
+ - It has a strict syntax(Indentation is imp)
+ - Easily convertable to JSON, XML
+ - Most languages use YAML
+ - More powerful when representing complex data
+ - Parsers, etc.. (various tools available)
+ - Parsing is easy
+
+
+ 

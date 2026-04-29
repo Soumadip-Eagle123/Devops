@@ -1,0 +1,19 @@
+Key Aspects of RAG:
+How it Works: RAG transforms data from external sources and user queries into numerical representations (word embeddings). When a question is asked, it searches a vector database for relevant content, which is then fed into the LLM alongside the query to provide context.
+Benefits:
+Accuracy: Reduces hallucinations (making things up) by grounding answers in retrieved data.
+Cost-Effective: Avoids expensive retraining of LLMs for new information.
+Transparency: Allows models to cite sources, allowing users to verify information.
+Personalization: Combines user data with LLM capabilities for tailored insights.
+Applications: Common uses include chatbots, question-answering systems, and content summarization tools that need to query specialized, private, or current data
+
+
+
+Key Aspects of RAG:
+How it Works: RAG transforms data from external sources and user queries into numerical representations (word embeddings). When a question is asked, it searches a vector database for relevant content, which is then fed into the LLM alongside the query to provide context.
+Benefits:
+Accuracy: Reduces hallucinations (making things up) by grounding answers in retrieved data.
+Cost-Effective: Avoids expensive retraining of LLMs for new information.
+Transparency: Allows models to cite sources, allowing users to verify information.
+Personalization: Combines user data with LLM capabilities for tailored insights.
+Applications: C
