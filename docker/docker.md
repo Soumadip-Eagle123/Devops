@@ -258,8 +258,84 @@ EXPOSE 3000
 
 # 7. Command that runs when the container STARTS (not at build time)
 CMD ["node", "app.js"]
+
 ```
 
+---
+
+## 🐙 Docker Compose — Multi-Container Orchestration
+
+Docker Compose lets you define and run your app's services in a single `docker-compose.yml` file instead of typing long `docker run` commands every time.
+
+### Example `docker-compose.yml`
+
+```yaml
+version: '3.9'
+
+services:
+  app:
+    build: .                  # Build image from Dockerfile in current directory
+    ports:
+      - "8000:8000"           # host-port:container-port
+    volumes:
+      - .:/app                # Sync local code into container (hot reload)
+      - /app/node_modules     # Keep container's node_modules (don't overwrite with host)
+```
+
+### Key Concepts
+
+| Field | Purpose |
+|-------|---------|
+| `services` | Each key is a container (e.g. `app`, `db`, `redis`) |
+| `build: .` | Build image from local Dockerfile |
+| `ports` | Map `host:container` ports |
+| `volumes` | Mount local files into the container |
+
+### The Two-Volume Pattern
+
+```yaml
+volumes:
+  - .:/app                # ✅ Mounts your source code for live changes
+  - /app/node_modules     # ✅ Prevents host node_modules from overwriting container's
+```
+
+> 💡 Without the second volume, your host machine's `node_modules` (or lack thereof) would overwrite the container's — breaking the app.
+
+---
+
+### Essential Commands
+
+```bash
+# Build image and start all services
+docker-compose up --build
+
+# Start services (no rebuild, uses cached image)
+docker-compose up
+
+# Run in detached/background mode
+docker-compose up -d
+
+# Stop all services
+docker-compose down
+
+# Stop and remove volumes too
+docker-compose down -v
+
+# View logs
+docker-compose logs -f
+
+# Rebuild without cache
+docker-compose build --no-cache
+```
+
+### `docker run` vs `docker-compose up`
+
+| | `docker run` | `docker-compose up` |
+|--|--|--|
+| Config | Inline flags | `docker-compose.yml` file |
+| Multi-container | Manual | Automatic |
+| Reproducible | ❌ Easy to forget flags | ✅ Config is version controlled |
+| Hot reload | Manual volume flag | Defined in yml |
 ### Key Distinctions
 
 | Instruction | When it runs | Purpose |
